@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "192564357376",
+    "firebase_url": "https://shield-f1616.firebaseio.com",
+    "project_id": "shield-f1616",
+    "storage_bucket": "shield-f1616.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:192564357376:android:b0816428d256a597d8ebe5",
+        "android_client_info": {
+          "package_name": "com.example.shield"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "192564357376-fnd99lkr1jcgj4utio9qkfkani8sbs3e.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.shield",
+            "certificate_hash": "47df60a5a6849ec74abf096afc585ea84d1de7c7"
+          }
+        },
+        {
+          "client_id": "192564357376-3j36oqg9vbubjktd6mgckoe60q2etcq4.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyB0b22AlabT9CMIMw3mNAo8YRjl4R3hhLQ"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "192564357376-3j36oqg9vbubjktd6mgckoe60q2etcq4.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
