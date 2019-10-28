@@ -54,10 +54,10 @@
 
             <Button
                 android:id="@+id/button3"
-                android:padding="30dp"
-                android:layout_width="wrap_content"
+                android:layout_width="199dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
+                android:padding="30dp"
                 android:text="Safe Zone" />
 
             <Button
