@@ -12,7 +12,7 @@ import android.widget.Toast;
 import com.google.android.material.snackbar.Snackbar;
 
 public class friendActivity extends AppCompatActivity {
-    Button mapButton;
+    Button mapButton,addButtotn;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -26,6 +26,18 @@ public class friendActivity extends AppCompatActivity {
             public void onClick(View v) {
                 Toast toast = Toast.makeText(getApplicationContext(), "Getting Friend's Location!", Toast.LENGTH_LONG); toast.show();
                 Intent mapIntent = new Intent(friendActivity.this, MapsActivity.class);
+                startActivity(mapIntent);
+                //finish();
+            }
+        });
+
+
+        addButtotn=findViewById(R.id.btn_add_new);
+        addButtotn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Toast toast = Toast.makeText(getApplicationContext(), "Add 3 Contacts!", Toast.LENGTH_LONG); toast.show();
+                Intent mapIntent = new Intent(friendActivity.this, addcontactsActivity.class);
                 startActivity(mapIntent);
                 //finish();
             }

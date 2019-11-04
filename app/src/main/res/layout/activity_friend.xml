@@ -46,6 +46,19 @@
 
         />
 
+    <Button
+        android:id="@+id/btn_add_new"
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:text= "Add new Contacts"
+        android:textSize="22sp"
+        android:textColor="@color/colorAccent"
+        android:layout_marginTop="40dp"
+        android:background="@drawable/button_round"
+
+
+        />
+
 
 
 
