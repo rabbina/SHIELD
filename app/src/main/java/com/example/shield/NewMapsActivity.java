@@ -1,12 +1,17 @@
 package com.example.shield;
 
 import androidx.annotation.RequiresApi;
+import androidx.core.app.ActivityCompat;
 import androidx.fragment.app.FragmentActivity;
 
 import android.Manifest;
 import android.content.pm.PackageManager;
+import android.location.Location;
+import android.location.LocationListener;
+import android.location.LocationManager;
 import android.os.Build;
 import android.os.Bundle;
+import android.telephony.SmsManager;
 
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
@@ -20,15 +25,29 @@ public class NewMapsActivity extends FragmentActivity implements OnMapReadyCallb
 
     private GoogleMap mMap;
 
+    private LocationManager locationManager;
+    private LocationListener locationListener;
+
+    private final long MIN_TIME = 1000;
+    private final long MIN_DIST = 5;
+
+    private LatLng latLng;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_new_maps);
         // Obtain the SupportMapFragment and get notified when the map is ready to be used.
-        MapFragment map = (MapFragment) getFragmentManager()
-                .findFragmentById(R.id.maps);
-        map.getMapAsync(this);
+        SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
+                .findFragmentById(R.id.map);
+        mapFragment.getMapAsync(this);
+
+        ActivityCompat.requestPermissions(this,new String[]{Manifest.permission.SEND_SMS}, PackageManager.PERMISSION_GRANTED);
+        ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.ACCESS_FINE_LOCATION, Manifest.permission.ACCESS_COARSE_LOCATION}, PackageManager.PERMISSION_GRANTED);
+
+        ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.INTERNET}, PackageManager.PERMISSION_GRANTED);
     }
+
 
 
     /**
@@ -42,24 +61,59 @@ public class NewMapsActivity extends FragmentActivity implements OnMapReadyCallb
      */
     @RequiresApi(api = Build.VERSION_CODES.M)
     @Override
-    public void onMapReady(GoogleMap map) {
-        // DO WHATEVER YOU WANT WITH GOOGLEMAP
-        map.setMapType(GoogleMap.MAP_TYPE_HYBRID);
-        if (checkSelfPermission(Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && checkSelfPermission(Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
-            // TODO: Consider
+    public void onMapReady(GoogleMap googleMap) {
 
-            //    Activity#requestPermissions
-            // here to request the missing permissions, and then overriding
-            //   public void onRequestPermissionsResult(int requestCode, String[] permissions,
-            //                                          int[] grantResults)
-            // to handle the case where the user grants the permission. See the documentation
-            // for Activity#requestPermissions for more details.
-            return;
+        mMap = googleMap;
+        LatLng sydney = new LatLng(-34, 151);
+        mMap.addMarker(new MarkerOptions().position(sydney).title("Marker in Sydney"));
+        mMap.moveCamera(CameraUpdateFactory.newLatLng(sydney));
+
+        locationListener = new LocationListener() {
+            @Override
+            public void onLocationChanged(Location location) {
+                try {
+                    latLng = new LatLng(location.getLatitude(), location.getLongitude());
+                    mMap.addMarker(new MarkerOptions().position(latLng).title("My Position"));
+
+                    mMap.moveCamera(CameraUpdateFactory.newLatLng(latLng));
+
+                    String phoneNumber = "lifeCraft";
+                    String myLatidude = String.valueOf(location.getAltitude());
+                    String myLongitude = String.valueOf(location.getLongitude());
+
+                    String message = "Latitude = " + myLatidude + " Longitude = " + myLongitude;
+                    SmsManager smsManager = SmsManager.getDefault();
+                    smsManager.sendTextMessage(phoneNumber,null,message,null,null);
+                }
+                catch (Exception e){
+                    e.printStackTrace();
+                }
+            }
+
+            @Override
+            public void onStatusChanged(String provider, int status, Bundle extras) {
+
+            }
+
+            @Override
+            public void onProviderEnabled(String provider) {
+
+            }
+
+            @Override
+            public void onProviderDisabled(String provider) {
+
+            }
+        };
+
+        locationManager = (LocationManager) getSystemService(LOCATION_SERVICE);
+        try {
+            locationManager.requestLocationUpdates(LocationManager.NETWORK_PROVIDER, MIN_TIME,MIN_DIST,locationListener);
+            locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER,MIN_TIME,MIN_DIST,locationListener);
         }
-        map.setMyLocationEnabled(true);
-        map.setTrafficEnabled(true);
-        map.setIndoorEnabled(true);
-        map.setBuildingsEnabled(true);
-        map.getUiSettings().setZoomControlsEnabled(true);
+        catch (SecurityException e){
+            e.printStackTrace();
+        }
+
     }
 }

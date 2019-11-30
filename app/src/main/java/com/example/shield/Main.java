@@ -12,7 +12,7 @@ import com.google.android.material.snackbar.Snackbar;
 import androidx.appcompat.app.AppCompatActivity;
 
 public class Main extends AppCompatActivity {
-    Button mapButton,fbutton,Sbutton;
+    Button mapButton,fbutton,Sbutton,pbutton;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -57,6 +57,16 @@ public class Main extends AppCompatActivity {
 //                Toast.makeText(Main.this, "This is my Toast message!", Toast.LENGTH_LONG).show();
 //            }
 //        });
+
+        pbutton=findViewById(R.id.button4);
+        pbutton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent SIntent = new Intent(Main.this, profile.class);
+                startActivity(SIntent);
+                //finish();
+            }
+        });
 
     }
 }
