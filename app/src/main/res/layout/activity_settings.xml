@@ -18,15 +18,7 @@
 
         android:text="Add Voice Command" />
 
-    <Button
-        android:id="@+id/addcontactsbtn"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:visibility="visible"
-        android:layout_gravity="bottom"
-        android:gravity="center"
 
-        android:text="Add Contacts" />
     <Button
         android:id="@+id/button9"
         android:layout_width="match_parent"

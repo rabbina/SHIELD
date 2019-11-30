@@ -31,12 +31,13 @@
             android:paddingBottom="25dp">
 
             <Button
-                android:id="@+id/button"
+                android:id="@+id/button4"
                 android:padding="30dp"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:text="Recordings" />
+                android:text="Profile" />
+
 
             <Button
                 android:id="@+id/button2"
@@ -54,19 +55,21 @@
 
             <Button
                 android:id="@+id/button3"
-                android:layout_width="199dp"
+                android:layout_width="145dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:padding="30dp"
                 android:text="Safe Zone" />
 
             <Button
-                android:id="@+id/button4"
+                android:id="@+id/button"
                 android:padding="30dp"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:text="Hidden Camera" />
+                android:text="Recordings" />
+
+
 
         </LinearLayout>
 

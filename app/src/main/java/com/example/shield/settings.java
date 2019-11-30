@@ -40,15 +40,6 @@ public class settings extends AppCompatActivity {
             }
         });
 
-        addcbutton=findViewById(R.id.addcontactsbtn);
-        addcbutton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                //Toast toast = Toast.makeText(getApplicationContext(), "add contacts", Toast.LENGTH_SHORT); toast.show();
-                Intent acintent = new Intent(settings.this, addcontactsActivity.class);
-                startActivity(acintent);
-                //finish();
-            }
-        });
+
     }
 }
